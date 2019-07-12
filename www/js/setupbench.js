@@ -67,8 +67,5 @@ var streamController_rcepjsMost = rcepjsMost.take(maxEvents);
     2 milliseconds is equal to 500 events/sec
     1 millisecond is equal to 1000 events/sec
 */
-var minInterval = 1; // milliseconds
+var minInterval = 1; //milliseconds
 var maxInterval = 2; //milliseconds
-
-var minWindowSize = 500;
-var maxWindowSize = 1000;

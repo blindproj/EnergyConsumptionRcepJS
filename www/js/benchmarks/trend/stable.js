@@ -1,5 +1,5 @@
 
-function stableRcepjs_minInterval_tumblingCountWindow_minWindowSize(total){
+function stableCepjsRx_minInterval(total){
     var count = 0;
 	async.whilst(
 		function() { return count < total; },
@@ -8,7 +8,7 @@ function stableRcepjs_minInterval_tumblingCountWindow_minWindowSize(total){
             onStartIteration();
             rcepjs.interval(minInterval)
                 .pipe(streamController_rcepjs,
-                    rcepjs.tumblingCountWindow(minWindowSize),
+                    rcepjs.tumblingTimeWindow(5000),
                     rcepjs.stable(['interval event'], 'payload', undefined, 'stable event'))
                 .subscribe({
                     next: function(value){},
@@ -22,30 +22,7 @@ function stableRcepjs_minInterval_tumblingCountWindow_minWindowSize(total){
 	);
 }
 
-function stableRcepjs_minInterval_tumblingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(minInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.tumblingCountWindow(maxWindowSize),
-                    rcepjs.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function stableRcepjs_maxInterval_tumblingCountWindow_minWindowSize(total){
+function stableCepjsRx_maxInterval(total){
     var count = 0;
 	async.whilst(
 		function() { return count < total; },
@@ -54,126 +31,7 @@ function stableRcepjs_maxInterval_tumblingCountWindow_minWindowSize(total){
             onStartIteration();
             rcepjs.interval(maxInterval)
                 .pipe(streamController_rcepjs,
-                    rcepjs.tumblingCountWindow(minWindowSize),
-                    rcepjs.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function stableRcepjs_maxInterval_tumblingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(maxInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.tumblingCountWindow(maxWindowSize),
-                    rcepjs.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-//sliding window
-
-function stableRcepjs_minInterval_slidingCountWindow_minWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(minInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.slidingCountWindow(minWindowSize),
-                    rcepjs.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function stableRcepjs_minInterval_slidingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(minInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.slidingCountWindow(maxWindowSize),
-                    rcepjs.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-// maxInterval
-
-function stableRcepjs_maxInterval_slidingCountWindow_minWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(maxInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.slidingCountWindow(minWindowSize),
-                    rcepjs.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function stableRcepjs_maxInterval_slidingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(maxInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.slidingCountWindow(maxWindowSize),
+                    rcepjs.tumblingTimeWindow(5000),
                     rcepjs.stable(['interval event'], 'payload', undefined, 'stable event'))
                 .subscribe({
                     next: function(value){},
@@ -189,7 +47,7 @@ function stableRcepjs_maxInterval_slidingCountWindow_maxWindowSize(total){
 
 // most
 
-function stableRcepjsMost_minInterval_tumblingCountWindow_minWindowSize(total){
+function stableCepjsMost_minInterval(total){
     var count = 0;
 	async.whilst(
 		function() { return count < total; },
@@ -198,7 +56,7 @@ function stableRcepjsMost_minInterval_tumblingCountWindow_minWindowSize(total){
             onStartIteration();
             rcepjsMost.interval(minInterval)
                 .pipe(streamController_rcepjsMost,
-                    rcepjsMost.tumblingCountWindow(minWindowSize),
+                    rcepjsMost.tumblingTimeWindow(5000),
                     rcepjsMost.stable(['interval event'], 'payload', undefined, 'stable event'))
                 .subscribe({
                     next: function(value){},
@@ -212,30 +70,7 @@ function stableRcepjsMost_minInterval_tumblingCountWindow_minWindowSize(total){
 	);
 }
 
-function stableRcepjsMost_minInterval_tumblingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(minInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.tumblingCountWindow(maxWindowSize),
-                    rcepjsMost.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function stableRcepjsMost_maxInterval_tumblingCountWindow_minWindowSize(total){
+function stableCepjsMost_maxInterval(total){
     var count = 0;
 	async.whilst(
 		function() { return count < total; },
@@ -244,126 +79,7 @@ function stableRcepjsMost_maxInterval_tumblingCountWindow_minWindowSize(total){
             onStartIteration();
             rcepjsMost.interval(maxInterval)
                 .pipe(streamController_rcepjsMost,
-                    rcepjsMost.tumblingCountWindow(minWindowSize),
-                    rcepjsMost.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function stableRcepjsMost_maxInterval_tumblingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(maxInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.tumblingCountWindow(maxWindowSize),
-                    rcepjsMost.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-//sliding window
-
-function stableRcepjsMost_minInterval_slidingCountWindow_minWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(minInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.slidingCountWindow(minWindowSize),
-                    rcepjsMost.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function stableRcepjsMost_minInterval_slidingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(minInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.slidingCountWindow(maxWindowSize),
-                    rcepjsMost.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-// maxInterval
-
-function stableRcepjsMost_maxInterval_slidingCountWindow_minWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(maxInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.slidingCountWindow(minWindowSize),
-                    rcepjsMost.stable(['interval event'], 'payload', undefined, 'stable event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function stableRcepjsMost_maxInterval_slidingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(maxInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.slidingCountWindow(maxWindowSize),
+                    rcepjsMost.tumblingTimeWindow(5000),
                     rcepjsMost.stable(['interval event'], 'payload', undefined, 'stable event'))
                 .subscribe({
                     next: function(value){},

@@ -1,5 +1,5 @@
 
-function relativeMaxDistanceRcepjs_minInterval_tumblingCountWindow_minWindowSize(total){
+function relativeMaxDistanceCepjsRx_minInterval(total){
     var count = 0;
 	async.whilst(
 		function() { return count < total; },
@@ -9,7 +9,7 @@ function relativeMaxDistanceRcepjs_minInterval_tumblingCountWindow_minWindowSize
             rcepjs.interval(minInterval)
                 .pipe(streamController_rcepjs,
                     rcepjs.mergeMap(x => rcepjs.of(generateRandomPoint())),
-                    rcepjs.tumblingCountWindow(minWindowSize),
+                    rcepjs.tumblingTimeWindow(5000),
                     rcepjs.relativeMaxDistance(['of event'], 'payload',
                         distance => distance > 500, 'relativeMaxDistance event'))
                 .subscribe({
@@ -24,32 +24,7 @@ function relativeMaxDistanceRcepjs_minInterval_tumblingCountWindow_minWindowSize
 	);
 }
 
-function relativeMaxDistanceRcepjs_minInterval_tumblingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(minInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.mergeMap(x => rcepjs.of(generateRandomPoint())),
-                    rcepjs.tumblingCountWindow(maxWindowSize),
-                    rcepjs.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function relativeMaxDistanceRcepjs_maxInterval_tumblingCountWindow_minWindowSize(total){
+function relativeMaxDistanceCepjsRx_maxInterval(total){
     var count = 0;
 	async.whilst(
 		function() { return count < total; },
@@ -59,136 +34,7 @@ function relativeMaxDistanceRcepjs_maxInterval_tumblingCountWindow_minWindowSize
             rcepjs.interval(maxInterval)
                 .pipe(streamController_rcepjs,
                     rcepjs.mergeMap(x => rcepjs.of(generateRandomPoint())),
-                    rcepjs.tumblingCountWindow(minWindowSize),
-                    rcepjs.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function relativeMaxDistanceRcepjs_maxInterval_tumblingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(maxInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.mergeMap(x => rcepjs.of(generateRandomPoint())),
-                    rcepjs.tumblingCountWindow(maxWindowSize),
-                    rcepjs.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-//sliding window
-
-function relativeMaxDistanceRcepjs_minInterval_slidingCountWindow_minWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(minInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.mergeMap(x => rcepjs.of(generateRandomPoint())),
-                    rcepjs.slidingCountWindow(minWindowSize),
-                    rcepjs.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function relativeMaxDistanceRcepjs_minInterval_slidingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(minInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.mergeMap(x => rcepjs.of(generateRandomPoint())),
-                    rcepjs.slidingCountWindow(maxWindowSize),
-                    rcepjs.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-// maxInterval
-
-function relativeMaxDistanceRcepjs_maxInterval_slidingCountWindow_minWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(maxInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.mergeMap(x => rcepjs.of(generateRandomPoint())),
-                    rcepjs.slidingCountWindow(minWindowSize),
-                    rcepjs.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function relativeMaxDistanceRcepjs_maxInterval_slidingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjs.interval(maxInterval)
-                .pipe(streamController_rcepjs,
-                    rcepjs.mergeMap(x => rcepjs.of(generateRandomPoint())),
-                    rcepjs.slidingCountWindow(maxWindowSize),
+                    rcepjs.tumblingTimeWindow(5000),
                     rcepjs.relativeMaxDistance(['of event'], 'payload',
                         distance => distance > 500, 'relativeMaxDistance event'))
                 .subscribe({
@@ -205,7 +51,7 @@ function relativeMaxDistanceRcepjs_maxInterval_slidingCountWindow_maxWindowSize(
 
 // most
 
-function relativeMaxDistanceRcepjsMost_minInterval_tumblingCountWindow_minWindowSize(total){
+function relativeMaxDistanceCepjsMost_minInterval(total){
     var count = 0;
 	async.whilst(
 		function() { return count < total; },
@@ -215,7 +61,7 @@ function relativeMaxDistanceRcepjsMost_minInterval_tumblingCountWindow_minWindow
             rcepjsMost.interval(minInterval)
                 .pipe(streamController_rcepjsMost,
                     rcepjsMost.mergeMap(x => rcepjsMost.of(generateRandomPoint())),
-                    rcepjsMost.tumblingCountWindow(minWindowSize),
+                    rcepjsMost.tumblingTimeWindow(5000),
                     rcepjsMost.relativeMaxDistance(['of event'], 'payload',
                         distance => distance > 500, 'relativeMaxDistance event'))
                 .subscribe({
@@ -230,32 +76,7 @@ function relativeMaxDistanceRcepjsMost_minInterval_tumblingCountWindow_minWindow
 	);
 }
 
-function relativeMaxDistanceRcepjsMost_minInterval_tumblingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(minInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.mergeMap(x => rcepjsMost.of(generateRandomPoint())),
-                    rcepjsMost.tumblingCountWindow(maxWindowSize),
-                    rcepjsMost.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function relativeMaxDistanceRcepjsMost_maxInterval_tumblingCountWindow_minWindowSize(total){
+function relativeMaxDistanceCepjsMost_maxInterval(total){
     var count = 0;
 	async.whilst(
 		function() { return count < total; },
@@ -265,136 +86,7 @@ function relativeMaxDistanceRcepjsMost_maxInterval_tumblingCountWindow_minWindow
             rcepjsMost.interval(maxInterval)
                 .pipe(streamController_rcepjsMost,
                     rcepjsMost.mergeMap(x => rcepjsMost.of(generateRandomPoint())),
-                    rcepjsMost.tumblingCountWindow(minWindowSize),
-                    rcepjsMost.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function relativeMaxDistanceRcepjsMost_maxInterval_tumblingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(maxInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.mergeMap(x => rcepjsMost.of(generateRandomPoint())),
-                    rcepjsMost.tumblingCountWindow(maxWindowSize),
-                    rcepjsMost.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-//sliding window
-
-function relativeMaxDistanceRcepjsMost_minInterval_slidingCountWindow_minWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(minInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.mergeMap(x => rcepjsMost.of(generateRandomPoint())),
-                    rcepjsMost.slidingCountWindow(minWindowSize),
-                    rcepjsMost.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function relativeMaxDistanceRcepjsMost_minInterval_slidingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(minInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.mergeMap(x => rcepjsMost.of(generateRandomPoint())),
-                    rcepjsMost.slidingCountWindow(maxWindowSize),
-                    rcepjsMost.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-// maxInterval
-
-function relativeMaxDistanceRcepjsMost_maxInterval_slidingCountWindow_minWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(maxInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.mergeMap(x => rcepjsMost.of(generateRandomPoint())),
-                    rcepjsMost.slidingCountWindow(minWindowSize),
-                    rcepjsMost.relativeMaxDistance(['of event'], 'payload',
-                        distance => distance > 500, 'relativeMaxDistance event'))
-                .subscribe({
-                    next: function(value){},
-                    error: function(error){},
-                    complete: function(){
-                        onCompleteIteration(callback, count);
-                    }
-                });
-		},
-		onComplete
-	);
-}
-
-function relativeMaxDistanceRcepjsMost_maxInterval_slidingCountWindow_maxWindowSize(total){
-    var count = 0;
-	async.whilst(
-		function() { return count < total; },
-		function(callback) {
-            count++;
-            onStartIteration();
-            rcepjsMost.interval(maxInterval)
-                .pipe(streamController_rcepjsMost,
-                    rcepjsMost.mergeMap(x => rcepjsMost.of(generateRandomPoint())),
-                    rcepjsMost.slidingCountWindow(maxWindowSize),
+                    rcepjsMost.tumblingTimeWindow(5000),
                     rcepjsMost.relativeMaxDistance(['of event'], 'payload',
                         distance => distance > 500, 'relativeMaxDistance event'))
                 .subscribe({
