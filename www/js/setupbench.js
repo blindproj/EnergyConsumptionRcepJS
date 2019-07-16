@@ -54,11 +54,13 @@ var maxEvents = 50000; //number of events
 //time
 //var streamController_rcepjs = rcepjs.takeUntil(rcepjs.timer(maxTime));
 //amount
-var streamController_rcepjs = rcepjs.take(maxEvents);
+//var streamController_rcepjs = rcepjs.take(maxEvents);
+var streamController_rcepjs = rcepjs.takeWhile(event => event.payload < maxEvents);
 //time
 //var streamController_rcepjsMost = rcepjsMost.takeUntil(rcepjsMost.timer(maxTime));
 //amount
-var streamController_rcepjsMost = rcepjsMost.take(maxEvents);
+//var streamController_rcepjsMost = rcepjsMost.take(maxEvents);
+var streamController_rcepjsMost = rcepjsMost.takeWhile(event => event.payload < maxEvents);
 
 
 // window creation rate
